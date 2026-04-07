@@ -6,7 +6,7 @@
 
 DROP DATABASE IF EXISTS eventdb;
 CREATE DATABASE eventdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE eventdb;
+USE eventdb; 
 
 -- =====================================================
 -- USERS TABLE
@@ -115,9 +115,7 @@ INSERT INTO events (title, description, date, venue, createdBy, status, expected
    'Annual cultural festival featuring dance, music, drama, and art competitions across 20+ categories.',
    '2025-08-05', 'Open Air Theatre', 2, 'approved', 1000),
 
-  ('Career Fair 2025',
-   'Connect with 50+ top companies recruiting for internships and full-time roles across all departments.',
-   '2025-08-20', 'Main Auditorium', 2, 'approved', 800);
+
 
 -- =====================================================
 -- SAMPLE REGISTRATION

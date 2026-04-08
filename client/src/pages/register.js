@@ -40,7 +40,7 @@ function Register({ onNavigate }) {
     setLoading(true);
     setErrors({});
     try {
-      const res = await fetch("http://localhost:5000/api/register-user", {
+      const res = await fetch(`${API}/api/register-user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: form.name.trim(), email: form.email.trim(), password: form.password, role: form.role }),
@@ -68,24 +68,15 @@ function Register({ onNavigate }) {
   return (
     <div className="rp-root">
 
-      {/* ══════════════════════════════
-          LEFT PANEL
-      ══════════════════════════════ */}
       <div className="rp-left">
-
-        {/* Brand top-left */}
         <div className="rp-brand">🎓 EventHub · Aurora University</div>
-
-        {/* Centered content */}
         <div className="rp-left-body">
-
           <div className="rp-hero">
             <h1 className="rp-hero-title">Create<br/>Account</h1>
             <p className="rp-hero-sub">
               Join thousands of students and faculty. Discover, register, and manage campus events — all in one place.
             </p>
           </div>
-
           <ul className="rp-features">
             {[
               "Browse approved campus events",
@@ -99,21 +90,14 @@ function Register({ onNavigate }) {
               </li>
             ))}
           </ul>
-
         </div>
-
-        {/* Decorative blobs */}
         <div className="rp-blob rp-blob-1" />
         <div className="rp-blob rp-blob-2" />
       </div>
 
-      {/* ══════════════════════════════
-          RIGHT FORM PANEL
-      ══════════════════════════════ */}
       <div className="rp-right">
         <div className="rp-card">
 
-          {/* Logo */}
           <div className="rp-logo-row">
             <span className="rp-logo-icon">🎓</span>
             <span className="rp-logo-text">Event<span className="rp-logo-accent">Hub</span></span>
@@ -128,51 +112,36 @@ function Register({ onNavigate }) {
             <div className="rp-alert">⚠️ {errors.general}</div>
           )}
 
-          {/* ── Full Name ── */}
           <div className="rp-field">
             <label className="rp-label">Full Name <span className="rp-required">*</span></label>
             <div className="rp-input-wrap">
               <span className="rp-input-icon">👤</span>
-              <input
-                type="text"
-                placeholder="e.g. Arjun Kumar"
-                value={form.name}
+              <input type="text" placeholder="e.g. Arjun Kumar" value={form.name}
                 onChange={(e) => setField("name", e.target.value)}
-                className={`rp-input ${errors.name ? "rp-input--err" : ""}`}
-              />
+                className={`rp-input ${errors.name ? "rp-input--err" : ""}`} />
             </div>
             {errMsg("name")}
           </div>
 
-          {/* ── University Email ── */}
           <div className="rp-field">
             <label className="rp-label">University Email <span className="rp-required">*</span></label>
             <div className="rp-input-wrap">
               <span className="rp-input-icon">✉️</span>
-              <input
-                type="text"
-                placeholder="yourname@au.edu.in"
-                value={form.email}
+              <input type="text" placeholder="yourname@au.edu.in" value={form.email}
                 onChange={(e) => setField("email", e.target.value)}
-                className={`rp-input ${errors.email ? "rp-input--err" : ""}`}
-              />
+                className={`rp-input ${errors.email ? "rp-input--err" : ""}`} />
             </div>
             {errMsg("email")}
           </div>
 
-          {/* ── Password + Confirm (2-col) ── */}
           <div className="rp-grid-2">
             <div className="rp-field">
               <label className="rp-label">Password <span className="rp-required">*</span></label>
               <div className="rp-input-wrap">
                 <span className="rp-input-icon">🔒</span>
-                <input
-                  type="password"
-                  placeholder="8+ chars, include ! @ # $"
-                  value={form.password}
+                <input type="password" placeholder="8+ chars, include ! @ # $" value={form.password}
                   onChange={(e) => setField("password", e.target.value)}
-                  className={`rp-input ${errors.password ? "rp-input--err" : ""}`}
-                />
+                  className={`rp-input ${errors.password ? "rp-input--err" : ""}`} />
               </div>
               {errors.password ? errMsg("password") : passwordStrength()}
             </div>
@@ -181,13 +150,9 @@ function Register({ onNavigate }) {
               <label className="rp-label">Confirm Password <span className="rp-required">*</span></label>
               <div className="rp-input-wrap">
                 <span className="rp-input-icon">🔒</span>
-                <input
-                  type="password"
-                  placeholder="Re-enter password"
-                  value={form.confirmPassword}
+                <input type="password" placeholder="Re-enter password" value={form.confirmPassword}
                   onChange={(e) => setField("confirmPassword", e.target.value)}
-                  className={`rp-input ${errors.confirmPassword ? "rp-input--err" : ""}`}
-                />
+                  className={`rp-input ${errors.confirmPassword ? "rp-input--err" : ""}`} />
               </div>
               {form.confirmPassword && !errors.confirmPassword && form.password === form.confirmPassword
                 ? <div className="reg-pw-strong">✅ Passwords match!</div>
@@ -195,28 +160,22 @@ function Register({ onNavigate }) {
             </div>
           </div>
 
-          {/* ── Role Selector ── */}
           <div className="rp-field" style={{ marginTop: "4px" }}>
             <label className="rp-label">I am a… <span className="rp-required">*</span></label>
             <div className="rp-role-row">
-              <button
-                onClick={() => setField("role", "student")}
+              <button onClick={() => setField("role", "student")}
                 className={`rp-role-btn ${form.role === "student" ? "rp-role-btn--active" : ""}`}>
                 <span style={{ fontSize: "24px" }}>🎓</span>
                 <span className="rp-role-label">Student</span>
-
               </button>
-              <button
-                onClick={() => setField("role", "faculty")}
+              <button onClick={() => setField("role", "faculty")}
                 className={`rp-role-btn ${form.role === "faculty" ? "rp-role-btn--active" : ""}`}>
                 <span style={{ fontSize: "24px" }}>👩‍🏫</span>
                 <span className="rp-role-label">Faculty</span>
-
               </button>
             </div>
           </div>
 
-          {/* ── Submit ── */}
           <button className="rp-submit" onClick={handleRegister} disabled={loading}>
             {loading ? "Creating your account…" : "Create Account →"}
           </button>

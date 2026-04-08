@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
 const API = process.env.REACT_APP_API || "";
+
 const get = (url) => fetch(API + url).then(r => r.json());
 
 function FacultyDashboard({ onLogout }) {

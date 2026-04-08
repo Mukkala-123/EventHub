@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const API = process.env.REACT_APP_API || "";
+const API = process.env.REACT_APP_API || "";;
 
 const SLIDES = [
   {
@@ -68,12 +68,12 @@ export default function Home({ onNavigate, user, onLogout }) {
   const slideTimer = useRef(null);
 
   useEffect(() => {
-    fetch(`${API}/api/events`).then(r=>r.json()).then(setApprovedEvents).catch(()=>{});
+    fetch(`${API}/api/events`).then(r=>r.json()).then(d=>setApprovedEvents(Array.isArray(d)?d:[])).catch(()=>setApprovedEvents([]));
     fetch(`${API}/api/event-count`).then(r=>r.json()).then(d=>setStats(p=>({...p,events:d.total}))).catch(()=>{});
     fetch(`${API}/api/user-count`).then(r=>r.json()).then(d=>setStats(p=>({...p,users:d.total}))).catch(()=>{});
     fetch(`${API}/api/registration-count`).then(r=>r.json()).then(d=>setStats(p=>({...p,registrations:d.total}))).catch(()=>{});
     if (user?.role === "student") {
-      fetch(`${API}/api/my-events/${user.id}`).then(r=>r.json()).then(d=>setMyEventIds(d.map(e=>e.id))).catch(()=>{});
+      fetch(`${API}/api/my-events/${user.id}`).then(r=>r.json()).then(d=>setMyEventIds(Array.isArray(d)?d.map(e=>e.id):[])).catch(()=>setMyEventIds([]));
     }
   }, [user]);
 
@@ -236,7 +236,7 @@ export default function Home({ onNavigate, user, onLogout }) {
           </div>
         ) : (
           <div className="hp-ev-grid">
-            {approvedEvents.map(ev => {
+            {(Array.isArray(approvedEvents)?approvedEvents:[]).map(ev => {
               const isReg = myEventIds.includes(ev.id);
               return (
                 <div className="hp-ev-card" key={ev.id}>

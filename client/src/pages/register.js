@@ -1,5 +1,5 @@
 import { useState } from "react";
-const API = process.env.REACT_APP_API || ""; 
+const API = process.env.REACT_APP_API || "";
 const validateEmail = (email) => {
   if (!email.trim()) return "Email is required.";
   if (!/^[a-zA-Z0-9._%+-]+@au\.edu\.in$/.test(email.trim()))
